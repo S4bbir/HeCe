@@ -9,7 +9,113 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          credits: number
+          email: string
+          full_name: string | null
+          id: string
+          subscription_id: string | null
+          subscription_status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          credits?: number
+          email: string
+          full_name?: string | null
+          id: string
+          subscription_id?: string | null
+          subscription_status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          credits?: number
+          email?: string
+          full_name?: string | null
+          id?: string
+          subscription_id?: string | null
+          subscription_status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      tool_usage: {
+        Row: {
+          created_at: string
+          credits_used: number
+          id: string
+          input_data: Json
+          output_data: Json | null
+          status: string
+          tool_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credits_used: number
+          id?: string
+          input_data?: Json
+          output_data?: Json | null
+          status?: string
+          tool_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credits_used?: number
+          id?: string
+          input_data?: Json
+          output_data?: Json | null
+          status?: string
+          tool_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tool_usage_tool_id_fkey"
+            columns: ["tool_id"]
+            isOneToOne: false
+            referencedRelation: "tools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tools: {
+        Row: {
+          created_at: string
+          credit_cost: number
+          description: string
+          id: string
+          input_schema: Json
+          is_active: boolean
+          name: string
+          webhook_url: string
+        }
+        Insert: {
+          created_at?: string
+          credit_cost?: number
+          description: string
+          id?: string
+          input_schema?: Json
+          is_active?: boolean
+          name: string
+          webhook_url: string
+        }
+        Update: {
+          created_at?: string
+          credit_cost?: number
+          description?: string
+          id?: string
+          input_schema?: Json
+          is_active?: boolean
+          name?: string
+          webhook_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
